@@ -1,0 +1,20 @@
+# name : Build & Release
+
+
+# on:
+#   push:
+#     branches:
+#       - "main"
+
+
+# jobs:
+#   build-and-release:
+#     name: Build app for apple and android and release on github
+
+#     runs-on: ubuntu-22.04
+
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
+
+      
