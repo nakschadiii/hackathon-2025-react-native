@@ -13,9 +13,8 @@ RUN npm install
 
 EXPOSE 80
 
-# run the app with npx 
-ENTRYPOINT ["npx", "expo", "start", "--web" , "--port", "80"]
+# build the app with npx
+RUN npx expo export -p web
 
-
-# docker build -t react-native-web-server .
-# docker run -p 80:80 react-native-web-server
+# start the app
+CMD [ "npx", "serve", "-s", "dist" , "-l", "80"]
