@@ -90,5 +90,15 @@ export const addTravel = async (token, origin, destination, transportType, co2) 
 
     events.emit('toast_success', 'Travel added');
     events.emit('update_profile');
+    events.emit('update_travels');
+    events.emit('reset_results');
+    return res;
+}
+
+export const getTravels = async (token) => {
+    const req = await fetch(`${baseUrl}/travels`, {
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` }
+    });
+    const res = await req.json();
     return res;
 }

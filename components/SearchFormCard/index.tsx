@@ -24,7 +24,7 @@ export default function() {
                     Annuler
                 </Button>
             </View>}
-            <Input placeholder="Destination" style={tw`flex-1 w-full px-4 ${Platform.OS === 'web' ? 'py-2' : 'py-4'}`} onChangeText={value => update("destination", value)} onSubmitEditing={submit} value={destination ?? ""} />
+            <Input placeholder="Destination" style={tw``} onChangeText={value => update("destination", value)} onSubmitEditing={submit} value={destination ?? ""} />
         </InputGroup>
         <Button style={tw`bg-${accent} text-${primaryText}`} onPress={submit}>
             Rechercher

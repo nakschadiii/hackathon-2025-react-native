@@ -3,6 +3,7 @@ import { Platform } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import tw from "twrnc"
 import CO2Stats from "./CO2Stats";
+import TravelsList from "./TravelsList";
 
 export default function({ style }: { style? }) {
     const col = useGrid()?.cols?.widget;
@@ -14,5 +15,6 @@ export default function({ style }: { style? }) {
 
     return <ScrollView style={[style, tw`w-full overflow-visible`]} contentContainerStyle={[tw`flex flex-row flex-wrap gap-6 ${Platform.OS === "web" ? "-mr-4" : ""}`]}>
         <CO2Stats style={[width]} />
+        <TravelsList style={[width]} />
     </ScrollView>
 }

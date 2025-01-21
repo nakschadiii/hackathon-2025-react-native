@@ -17,9 +17,9 @@ export default () => {
         (isMobile ? loggedMobileLinking : loggedLinking) :
         unloggedLinking;
         
-    const profile = useProfile();
+    const { travels, profile } = useProfile();
 
-    return init && <AppContext.Provider value={{ profile }}>
+    return init && <AppContext.Provider value={{ profile, travels }}>
         <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
             <Stack.Navigator screenOptions={{ cardStyle: tw`w-full h-full` }}>
                 {token ?
