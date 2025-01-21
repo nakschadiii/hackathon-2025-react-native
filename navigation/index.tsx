@@ -16,6 +16,7 @@ export default () => {
     const linking = token ?
         (isMobile ? loggedMobileLinking : loggedLinking) :
         unloggedLinking;
+        
     const profile = useProfile();
 
     return init && <AppContext.Provider value={{ profile }}>

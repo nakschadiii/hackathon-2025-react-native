@@ -6,27 +6,46 @@ import InputGroup from "../InputGroup";
 import Button from "../Button";
 import { useTheme } from "@/utils/theme";
 import Card from "../Card";
+import { events } from "@/utils/events";
+import useSearch from "@/hooks/useSearch";
+import { useEffect, useState } from "react";
+import { MyPosition } from "./MyPosition";
 
 export default function() {
-    const { primary, primaryText, accent } = useTheme();
+    const { primaryText, accent } = useTheme();
+    const [ coordinates, setCoordinates ] = useState({ origin: null, destination: null });
+    const [ current_position, setCurrentPosition ] = useState(false);
+    const { origin, destination } = coordinates;
+    useSearch();
+
+    const submit = () => events.emit("calculateCO2", origin, destination);
+    const update = (key, value) => setCoordinates({ ...coordinates, [key]: { address: value } });
+
+    useEffect(() => {
+        events.on('set_origin_to_current_position', (lat, lng) => {
+            setCoordinates({ ...coordinates, origin: { lat, lng } });
+            setCurrentPosition(true);
+        });
+        events.on('reset_origin', (lat, lng) => {
+            setCoordinates({ ...coordinates, origin: {} });
+            setCurrentPosition(false);
+        });
+    }, []);
 
     return <Card style={tw`w-full gap-2`}>
         <InputGroup style={tw`relative`}>
-            <View style={tw`flex-row items-center justify-between w-full gap-2`}>
-                <Input placeholder="Destination" style={tw`flex-1 w-full`} />
-                <Button style={tw`bg-[#0000] text-${accent} px-4 items-center justify-center`} onPress={() => console.log("my position")}>
-                    <View style={tw`flex-row items-center justify-center gap-1`}>
-                        <MaterialIcons name="my-location" size={14} color={tw`text-${accent}`.color} />
-                        <Text style={tw`text-${accent}`}>Ma position</Text>
-                    </View>
+            {!current_position ? <View style={tw`flex-row items-center justify-between w-full gap-2`}>
+                <Input placeholder="Provenance" style={tw`flex-1 w-full`} onChangeText={value => update("origin", value)} onSubmitEditing={submit} />
+                <MyPosition />
+            </View> : <View style={tw`flex-row items-center justify-between w-full gap-2`}>
+                <Text style={tw`py-2 px-4 text-${accent}`}>Position actuelle</Text>
+                <Button style={tw`bg-[#0000] text-red-500 px-4 py-2`} onPress={() => events.emit("reset_origin")}>
+                    Annuler
                 </Button>
-            </View>
-            <Input placeholder="Provenance" />
-            {/* <Button style={[tw`rounded-full bg-white border border-gray-200 absolute right-0 top-0 bottom-0 w-8 h-8 items-center justify-center text-${primaryText}`, { zIndex: 999, transform: [{ translateX: 15 }, { translateY: -47.5 }] }]} onPress={() => console.log("search")}>
-                <AntDesign name="swap" size={20} color="black" />
-            </Button> */}
+            </View>}
+            <Input placeholder="Destination" style={tw`flex-1 w-full`} onChangeText={value => update("destination", value)} onSubmitEditing={submit} />
         </InputGroup>
-        <Button style={tw`bg-${accent} text-${primaryText}`} onPress={() => console.log("search")}>
+        <Button style={tw`bg-${accent} text-${primaryText}`} onPress={submit}>
             Rechercher
         </Button>
     </Card>

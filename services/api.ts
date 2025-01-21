@@ -54,3 +54,18 @@ export const getProfile = async (token) => {
     const res = await req.json();
     return res;
 };
+
+export const calculateCO2 = async (token, origin, destination) => {
+    const req = await fetch(`${baseUrl}/CalculateCO2`, {
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+        method: "POST",
+        body: JSON.stringify({
+            "itinerary": [
+                origin,
+                destination
+            ],
+        })
+    });
+    const res = await req.json();
+    return res;
+}

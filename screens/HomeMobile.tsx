@@ -5,7 +5,6 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
 import MiniNav from "@/components/MiniNav";
 import MapScreen from "@/components/MapScreen";
-import { Image } from "react-native";
 import Logo from "@/components/Logo";
 
 export default function() {
