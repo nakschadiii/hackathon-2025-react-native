@@ -6,6 +6,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Octicons from '@expo/vector-icons/Octicons';
 import tw from "twrnc";
 import AppContext from "@/navigation/context";
+import prettyNum from "pretty-num";
 
 export default function({ style }) {
     const { profile } = useContext(AppContext);
@@ -21,7 +22,7 @@ export default function({ style }) {
         <Title level={2}>Statistiques</Title>
         <View style={tw`flex flex-row gap-2 items-center`}>
             <Icon />
-            <Title level="4">{profile?.CO2OfMonth}g CO<Text style={[tw`text-sm`]}>2</Text></Title>
+            <Title level="4">{prettyNum(Math.round(profile?.CO2OfMonth), {thousandsSeparator: ' ', separateOneDigit: true})}g CO<Text style={[tw`text-sm`]}>2</Text></Title>
             <Text>ce mois-ci</Text>
         </View>
     </Card>

@@ -1,6 +1,6 @@
 import { SafeAreaView, View } from "react-native";
 import Title from "@/components/Title";
-import HomeMap from "@/components/HomeMap";
+import Results from "@/components/Results";
 import SearchFormCard from "@/components/SearchFormCard";
 import { useTheme } from "@/utils/theme";
 import tw from "twrnc";
@@ -18,6 +18,6 @@ export default function({ header=false }) {
                 <SearchFormCard />
             </View>
         </View>
-        <HomeMap />
+        <Results />
     </SafeAreaView>
 }

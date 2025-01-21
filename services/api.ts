@@ -1,5 +1,5 @@
 import { events } from "@/utils/events";
-const baseUrl = "https://back-end-ececaugsbda8geff.francecentral-01.azurewebsites.net/";
+const baseUrl = "https://back-end-ececaugsbda8geff.francecentral-01.azurewebsites.net";
 
 export const handleLogin = async (form) => {
     try {
@@ -67,5 +67,28 @@ export const calculateCO2 = async (token, origin, destination) => {
         })
     });
     const res = await req.json();
+    return res;
+}
+
+export const addTravel = async (token, origin, destination, transportType, co2) => {
+    const body = JSON.stringify({
+        "startLocation": origin,
+        "endLocation": destination,
+        "distance": 0,
+        "duration": 0,
+        "CO2": co2,
+        "TransportType": transportType
+    });
+
+    const req = await fetch(`${baseUrl}/travels`, {
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+        method: "POST",
+        body
+    });
+
+    const res = await req.json();
+
+    events.emit('toast_success', 'Travel added');
+    events.emit('update_profile');
     return res;
 }
