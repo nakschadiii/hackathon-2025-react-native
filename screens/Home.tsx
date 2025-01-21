@@ -5,21 +5,14 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
 import MapScreen from "@/components/MapScreen";
 import Card from "@/components/Card";
-import { View } from "react-native";
-import { useWindowWidth } from "@/hooks/useScreen";
+import useGrid from "@/hooks/useGrid";
+import ProfileScreen from "@/components/ProfileScreen";
+import Navbar from "@/components/Navbar";
 
 export default function() {
     const { primary, primaryText, background, text, accent } = useTheme();
     const navigation = useNavigation();
-
-    const width = useWindowWidth();
-    
-    const cols = {
-        [width>=600 && width<800]: [6,6],
-        [width>=800 && width<1200]: [6,6],
-        [width>=1200 && width<1400]: [6,6],
-        [width>=1400]: [4,8]
-    }[true];
+    const { cols: {map, widgets}, Grid } = useGrid();
 
     useEffect(() => {
         navigation.setOptions({
@@ -29,11 +22,12 @@ export default function() {
     }, [primary, navigation])
 
     return <PageScreenView>
-        <View style={[tw`p-4 flex-row`, { flex: 12 }]}>
-            <Card style={[tw`w-full h-full p-0 overflow-hidden bg-${primary}`, { flex: cols[0] }]}>
+        <Navbar />
+        <Grid style={tw`p-4 gap-6`}>
+            <Card style={[tw`w-full h-full p-0 overflow-hidden bg-${primary}`, { flex: map }]}>
                 <MapScreen header={true} />
             </Card>
-            <View style={{ flex: cols[1] }} />
-        </View>
+            <ProfileScreen style={{ flex: widgets }} />
+        </Grid>
     </PageScreenView>
 }

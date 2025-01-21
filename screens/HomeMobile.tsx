@@ -5,6 +5,8 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
 import MiniNav from "@/components/MiniNav";
 import MapScreen from "@/components/MapScreen";
+import { Image } from "react-native";
+import Logo from "@/components/Logo";
 
 export default function() {
     const { primary, primaryText } = useTheme();
@@ -18,7 +20,8 @@ export default function() {
             headerTintColor: tw`text-${primaryText}`,
             headerShadowVisible: false,
             headerTitle: "",
-            headerRight: () => <MiniNav />
+            headerRight: () => <MiniNav />,
+            headerLeft: () => <Logo color={"white"} />
         })
     }, [primary, navigation])
 

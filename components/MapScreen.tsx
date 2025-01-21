@@ -3,12 +3,13 @@ import Title from "@/components/Title";
 import HomeMap from "@/components/HomeMap";
 import SearchFormCard from "@/components/SearchFormCard";
 import { useTheme } from "@/utils/theme";
-import useProfile from "@/hooks/useProfile";
 import tw from "twrnc";
+import { useContext } from "react";
+import AppContext from "@/navigation/context";
 
 export default function({ header=false }) {
     const { primary, primaryText } = useTheme();
-    const profile = useProfile();
+    const { profile } = useContext(AppContext);
 
     return <SafeAreaView style={tw`flex-1 w-full gap-2 h-full`}>
         <View style={[tw`flex p-4 bg-${primary}`]}>

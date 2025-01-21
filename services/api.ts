@@ -1,6 +1,5 @@
 import { events } from "@/utils/events";
-import { Platform } from "react-native";
-const baseUrl = Platform.OS === "web" ? "http://localhost" : "https://5fec-80-70-37-74.ngrok-free.app";
+const baseUrl = "https://back-end-ececaugsbda8geff.francecentral-01.azurewebsites.net/";
 
 export const handleLogin = async (form) => {
     try {

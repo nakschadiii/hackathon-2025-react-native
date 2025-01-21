@@ -22,6 +22,7 @@ export default function() {
             headerTitleStyle: tw`text-${text}`,
             headerTintColor: tw`text-${accent}`,
             headerShadowVisible: false,
+            headerBackVisible: true
         })
     }, [primary, navigation])
 

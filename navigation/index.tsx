@@ -7,6 +7,8 @@ import { linking as loggedLinking, routes as LoggedRoutes } from './logged';
 import { linking as loggedMobileLinking, routes as LoggedMobileRoutes } from './loggedMobile';
 import { linking as unloggedLinking, routes as UnloggedRoutes } from './unlogged';
 import usePlatform from '@/hooks/usePlatform';
+import useProfile from '@/hooks/useProfile';
+import AppContext from "./context";
 
 export default () => {
     const { token, init } = useToken();
@@ -14,13 +16,16 @@ export default () => {
     const linking = token ?
         (isMobile ? loggedMobileLinking : loggedLinking) :
         unloggedLinking;
+    const profile = useProfile();
 
-    return init && <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
-        <Stack.Navigator screenOptions={{ cardStyle: tw`w-full h-full` }}>
-            {token ?
-            (isMobile ? LoggedMobileRoutes : LoggedRoutes) :
-            UnloggedRoutes}
-        </Stack.Navigator>
-    </NavigationContainer>
+    return init && <AppContext.Provider value={{ profile }}>
+        <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
+            <Stack.Navigator screenOptions={{ cardStyle: tw`w-full h-full` }}>
+                {token ?
+                (isMobile ? LoggedMobileRoutes : LoggedRoutes) :
+                UnloggedRoutes}
+            </Stack.Navigator>
+        </NavigationContainer>
+    </AppContext.Provider>
 }
 

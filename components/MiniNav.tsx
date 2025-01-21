@@ -9,15 +9,15 @@ import { useTheme } from "@/utils/theme";
 export default function() {
     const navigation = useNavigation();
     const { primaryText } = useTheme();
-    const iconSize = 20;
+    const iconSize = 24;
 
-    return <View style={tw`flex-row items-center justify-end px-4`}>
+    return <View style={tw`flex-row items-center justify-between px-4`}>
         {/* <Button style={tw`bg-[#0000]`} onPress={() => navigation.navigate("home")}>
             <MaterialIcons name="home" size={18} color={tw`text-${primaryText}`.color} />
-        </Button>
+        </Button>*/}
         <Button style={tw`bg-[#0000]`} onPress={() => navigation.navigate("profile")}>
-            <MaterialIcons name="person" size={18} color={tw`text-${primaryText}`.color} />
-        </Button> */}
+            <MaterialIcons name="person" size={iconSize} color={tw`text-${primaryText}`.color} />
+        </Button>
         <Button style={tw`bg-[#0000]`} onPress={() => navigation.navigate("settings")}>
             <Ionicons name="settings-sharp" size={iconSize} color={tw`text-${primaryText}`.color} />
         </Button>

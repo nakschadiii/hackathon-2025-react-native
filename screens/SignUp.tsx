@@ -9,6 +9,7 @@ import { Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import BackgroudHome from "@/components/BackgroudHome";
 import { useTheme } from "@/utils/theme";
+import Logo from "@/components/Logo";
 
 export default function() {
     const { username, password, password_confirm, submit } = useSignUp();
@@ -18,6 +19,9 @@ export default function() {
     return <ScreenView>
         <BackgroudHome />
         <View style={tw`flex-1 items-start justify-center w-3/4 gap-2`}>
+            <View style={tw`w-full flex justify-center items-center`}>
+                <Logo style={[tw`w-3/4 h-48 -mt-48`, { resizeMode: 'contain' }]} />
+            </View>
             <Title level={4} style={tw`text-${primaryText}`}>Inscription</Title>
             <Card style={tw`w-full gap-2`}>
                 <InputGroup>
