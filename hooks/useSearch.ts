@@ -8,7 +8,9 @@ export default function() {
     
     useEffect(() => {
         if (!token) return;
-        events.on("calculateCO2", (origin, destination) => calculateCO2(token, origin, destination).then(console.log));
+        events.on("calculateCO2", (origin, destination) => calculateCO2(token, origin, destination).then(v => {
+            if(!v.detail) events.emit("co2_calculated", v);
+        }));
     }, [token]);
 
     return;

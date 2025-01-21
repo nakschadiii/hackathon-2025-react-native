@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Platform } from "react-native";
 import tw from "twrnc";
 import { MaterialIcons } from '@expo/vector-icons';
 import Input from "../Input";
@@ -43,7 +43,7 @@ export default function() {
                     Annuler
                 </Button>
             </View>}
-            <Input placeholder="Destination" style={tw`flex-1 w-full`} onChangeText={value => update("destination", value)} onSubmitEditing={submit} />
+            <Input placeholder="Destination" style={tw`flex-1 w-full px-4 ${Platform.OS === 'web' ? 'py-2' : 'py-4'}`} onChangeText={value => update("destination", value)} onSubmitEditing={submit} />
         </InputGroup>
         <Button style={tw`bg-${accent} text-${primaryText}`} onPress={submit}>
             Rechercher

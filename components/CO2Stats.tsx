@@ -21,7 +21,7 @@ export default function({ style }) {
         <Title level={2}>Statistiques</Title>
         <View style={tw`flex flex-row gap-2 items-center`}>
             <Icon />
-            <Title level="4">{profile?.CO2OfMonth}g</Title>
+            <Title level="4">{profile?.CO2OfMonth}g CO<Text style={[tw`text-sm`]}>2</Text></Title>
             <Text>ce mois-ci</Text>
         </View>
     </Card>
